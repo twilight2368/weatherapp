@@ -1,7 +1,12 @@
+import SideBar from "../components/Sidebar";
+
 export default function Main(props) {
     return (
         <>
-         <div className="min-h-screen bg-black"></div>
+            <SideBar>
+                
+            </SideBar>
+         
         </>
     )
 }
