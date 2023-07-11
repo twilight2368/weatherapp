@@ -1,10 +1,22 @@
 import { useContext, useEffect, useState } from "react";
 import { Switch } from "@headlessui/react";
 import { cityContext } from "../App";
+import { themeContext } from "../App";
 export default function SideBar(props) {
-  const [darkmode, setDarkmode] = useState(false);
+  const [darkmode, setDarkmode] = useContext(themeContext);
   const [allcity, setAllcity] = useState();
   const [city, setCity] = useContext(cityContext);
+  
+  useEffect(()=>{
+    const theme = localStorage.getItem('theme')
+    if (theme === 'dark') {
+      setDarkmode(true);
+    }else if ( theme === 'light') {
+      setDarkmode(false);
+    }else {
+      localStorage.setItem('theme', 'light')
+    }
+  }, [])
 
   useEffect(()=>{
    fetch("JSON/MyCity.json")
@@ -39,6 +51,13 @@ export default function SideBar(props) {
                   <Switch
                     checked={darkmode}
                     onChange={setDarkmode}
+                    onClick={(e)=>{
+                      if (darkmode) {
+                        localStorage.setItem('theme', 'light')
+                      }else{
+                        localStorage.setItem('theme', 'dark');
+                      }
+                    }}
                     className={`${darkmode ? "bg-slate-800" : " bg-slate-300"}
                     relative inline-flex h-6 w-[43px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
                   >

@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 export default function Details(props) {
   const [timeon, setTimeon] = useState('sunrise');
-  useEffect(() => {
-    console.log(props.data);
-  }, []);
+  // useEffect(() => {
+  //   console.log(props.data);
+  // }, []);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -24,7 +24,7 @@ export default function Details(props) {
               alt=""
               className="h-20 w-20 block"
             />
-            <div className="text-xl">{props.data.astro.sunrise}</div>
+            <div className="text-2xl">{props.data.astro.sunrise}</div>
           </div>
           <div
             className={
@@ -37,7 +37,7 @@ export default function Details(props) {
               alt=""
               className="h-20 w-20 block"
             />
-            <div className="text-xl">{props.data.astro.sunset}</div>
+            <div className="text-2xl">{props.data.astro.sunset}</div>
           </div>
           <div
             className={
@@ -50,7 +50,7 @@ export default function Details(props) {
               alt=""
               className="h-20 w-20 block"
             />
-            <div className="text-xl">{props.data.astro.moonrise}</div>
+            <div className="text-2xl">{props.data.astro.moonrise}</div>
           </div>
         </div>
 
