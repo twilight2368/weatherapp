@@ -1,8 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Switch } from "@headlessui/react";
-
+import { cityContext } from "../App";
 export default function SideBar(props) {
   const [darkmode, setDarkmode] = useState(false);
+  const [allcity, setAllcity] = useState();
+  const [city, setCity] = useContext(cityContext);
+
+  useEffect(()=>{
+   fetch("JSON/MyCity.json")
+     .then((response) => {
+       return response.json();
+     })
+     .then((data) => {
+       //console.log(data);
+       setAllcity(data);
+     })
+     .catch((err) => {
+       console.log(err);
+     });
+  }, []);
   return (
     <>
       <div className={darkmode ? "dark" : ""}>
@@ -41,33 +57,43 @@ export default function SideBar(props) {
                 <div className="relative w-4/5 mx-auto">
                   <label
                     htmlFor="countries"
-                    className="block mb-2 text-xl font-bold text-gray-900 dark:text-white"
+                    className="block mb-0 text-xl font-bold text-gray-900 dark:text-white"
                   >
                     Select an option
                   </label>
                   <select
                     id="countries"
-                    className="bg-transparent  text-gray-900 text-2xl rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:bg-transparent dark:text-white"
+                    className="bg-transparent  text-gray-900 text-2xl rounded-lg block w-full p-1.5 dark:bg-gray-700 dark:bg-transparent dark:text-white"
                     onChange={(e) => {
                       console.log(e.target.value);
+                      setCity(e.target.value);
                       localStorage.setItem("currentCity", e.target.value);
                     }}
                   >
-                    <option value="I dont know" className="dark:text-black text-sm hidden" >
+                    <option
+                      value="I dont know"
+                      className="dark:text-black text-sm hidden"
+                    >
                       Choose your city
                     </option>
-                    <option value="US" className="dark:text-black text-sm">
-                      United States
-                    </option>
-                    <option value="CA" className="dark:text-black text-sm">
-                      Canada
-                    </option>
-                    <option value="FR" className="dark:text-black text-sm">
-                      France
-                    </option>
-                    <option value="DE" className="dark:text-black text-sm">
-                      Germany
-                    </option>
+
+                    {allcity ? (
+                      allcity.map((e) => {
+                        return (
+                          <>
+                            <option
+                              key={e.key}
+                              value={e.key}
+                              className="text-black dark:text-black text-sm"
+                            >
+                              {e.key}
+                            </option>
+                          </>
+                        );
+                      })
+                    ) : (
+                      <></>
+                    )}
                   </select>
                 </div>
               </div>
