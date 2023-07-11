@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Switch } from "@headlessui/react";
 import { cityContext } from "../App";
 import { themeContext } from "../App";
@@ -6,30 +7,31 @@ export default function SideBar(props) {
   const [darkmode, setDarkmode] = useContext(themeContext);
   const [allcity, setAllcity] = useState();
   const [city, setCity] = useContext(cityContext);
-  
-  useEffect(()=>{
-    const theme = localStorage.getItem('theme')
-    if (theme === 'dark') {
-      setDarkmode(true);
-    }else if ( theme === 'light') {
-      setDarkmode(false);
-    }else {
-      localStorage.setItem('theme', 'light')
-    }
-  }, [])
+  const [searchcity, setSearchcity] = useState();
 
-  useEffect(()=>{
-   fetch("JSON/MyCity.json")
-     .then((response) => {
-       return response.json();
-     })
-     .then((data) => {
-       //console.log(data);
-       setAllcity(data);
-     })
-     .catch((err) => {
-       console.log(err);
-     });
+  useEffect(() => {
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") {
+      setDarkmode(true);
+    } else if (theme === "light") {
+      setDarkmode(false);
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }, []);
+
+  useEffect(() => {
+    fetch("JSON/MyCity.json")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        //console.log(data);
+        setAllcity(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
   return (
     <>
@@ -51,11 +53,11 @@ export default function SideBar(props) {
                   <Switch
                     checked={darkmode}
                     onChange={setDarkmode}
-                    onClick={(e)=>{
+                    onClick={(e) => {
                       if (darkmode) {
-                        localStorage.setItem('theme', 'light')
-                      }else{
-                        localStorage.setItem('theme', 'dark');
+                        localStorage.setItem("theme", "light");
+                      } else {
+                        localStorage.setItem("theme", "dark");
                       }
                     }}
                     className={`${darkmode ? "bg-slate-800" : " bg-slate-300"}
@@ -115,6 +117,34 @@ export default function SideBar(props) {
                     )}
                   </select>
                 </div>
+              </div>
+
+              <div className=" w-full h-24">
+                <form className="w-4/5 mx-auto max-w-sm">
+                  <div className="flex justify-center items-center border-b-2 border-rose-500 dark:border-sky-500 py-2">
+                    <input
+                      className="bg-transparent border-none w-full text-slate-700 dark:text-slate-200 mr-3 py-1 px-2 text-2xl leading-tight focus:outline-none"
+                      type="text"
+                      placeholder="Search"
+                      onChange={(e) => {
+                        setSearchcity(e.target.value);
+                      }}
+                    />
+                    <button
+                      className="flex-shrink-0 bg-rose-500 hover:bg-rose-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-xl text-white py-1 px-2 rounded"
+                      type="button"
+                      onClick={(e) => {
+                        setCity(searchcity);
+                      }}
+                    >
+                      <MagnifyingGlassIcon className="h-6 w-6 text-slate-700 dark:text-slate-200" />
+                    </button>
+                  </div>
+                  <div className="text-slate-600 dark:text-slate-200 text-sm text-center">
+                    Remind: The city you are searching for won’t be saved when
+                    you reload.
+                  </div>
+                </form>
               </div>
             </div>
           </div>

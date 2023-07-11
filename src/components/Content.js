@@ -17,7 +17,7 @@ export default function Content(props) {
         <div className=" col-span-3">
           {props.data ? <CurrentTemp data={props.data.current} /> : <></>}
         </div>
-        <div className=" col-span-3 row-span-2 pt-0 p-5">
+        <div className=" col-span-3 row-span-2 pt-0 p-4">
           {props.data ? (
             <>
               <Chart data={props.data.forecast.forecastday[0]} />

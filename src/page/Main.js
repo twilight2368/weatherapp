@@ -4,12 +4,13 @@ import Loading from "../components/Loading";
 import { APIkey } from "../Shared";
 import { cityContext } from "../App";
 import Content from "../components/Content";
+import Notfound from "../components/Notfound";
 
 export default function Main(props) {
   const [loading, setLoading] = useState(false);
-  const [city, setCity] = useContext(cityContext);
   const [currentdata, setCurrentdata] = useState();
-
+  const [baduser, setBaduser] = useState(false);
+  const [city, setCity] = useContext(cityContext);
   const url =
     "https://weatherapi-com.p.rapidapi.com/forecast.json?q=" + city + "&days=3";
   const options = {
@@ -25,6 +26,12 @@ export default function Main(props) {
     if (city) {
       fetch(url, options)
         .then((response) => {
+          //console.log(response.status);
+          if (response.status === 400) {
+            setLoading(false);
+            setBaduser(true);
+            localStorage.setItem("currentCity", "Hanoi");
+          }
           return response.json();
         })
         .then((data) => {
@@ -48,10 +55,13 @@ export default function Main(props) {
           <>
             <Loading />
           </>
-        ) : (
+        ) : (   
           <>
+          { baduser ? <Notfound/>  : <>
             <Content data = {currentdata} />
+          </>}
           </>
+        
         )}
       </SideBar>
     </>

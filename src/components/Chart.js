@@ -17,6 +17,7 @@ export default function Chart(props) {
         // Push new elements to the new arrays
         newMydata.push(e.temp_c);
         newLabel.push(e.time.split(" ")[1]);
+
       });
 
       // Call setState once with the new arrays

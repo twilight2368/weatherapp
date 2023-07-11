@@ -28,7 +28,6 @@ export default function LineChart(props) {
         borderColor: color,
         data: props.data,
         fill: false,
-        tension: 0.1,
       },
     ],
   };
@@ -46,9 +45,17 @@ export default function LineChart(props) {
         },
       },
     },
+    plugins: {
+      legend: {
+        display: true,
+        labels: {
+          color: axiscolor,
+        },
+      },
+    },
   };
   return (
-    <div className="h-full w-full relative ml-24">
+    <div className="= mx-28 h-full w-full relative">
       <Line data={data} options={option}/>
     </div>
   );
