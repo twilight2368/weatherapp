@@ -41,7 +41,7 @@ export default function SideBar(props) {
             <div className="h-full w-full drop-shadow-xl bg-slate-200 rounded-lg dark:bg-slate-700">
               <div className=" h-24 flex flex-row justify-center items-center gap-3">
                 <img
-                  src={require("../images/weather.png")}
+                  src={require("../images/weather1.png")}
                   alt=""
                   className="h-1/2 "
                 />
@@ -88,6 +88,7 @@ export default function SideBar(props) {
                     onChange={(e) => {
                       console.log(e.target.value);
                       setCity(e.target.value);
+                      setSearchcity(e.target.value);
                       localStorage.setItem("currentCity", e.target.value);
                     }}
                   >
@@ -120,29 +121,35 @@ export default function SideBar(props) {
               </div>
 
               <div className=" w-full h-24">
-                <form className="w-4/5 mx-auto max-w-sm">
+                <form
+                  id="searchcity"
+                  className="w-4/5 mx-auto max-w-sm"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    setCity(searchcity);
+                  }}
+                >
                   <div className="flex justify-center items-center border-b-2 border-rose-500 dark:border-sky-500 py-2">
                     <input
                       className="bg-transparent border-none w-full text-slate-700 dark:text-slate-200 mr-3 py-1 px-2 text-2xl leading-tight focus:outline-none"
                       type="text"
                       placeholder="Search"
+                      value={searchcity}
                       onChange={(e) => {
                         setSearchcity(e.target.value);
                       }}
                     />
                     <button
                       className="flex-shrink-0 bg-rose-500 hover:bg-rose-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-xl text-white py-1 px-2 rounded"
-                      type="button"
-                      onClick={(e) => {
-                        setCity(searchcity);
-                      }}
+                      type="submit"
+                      form="searchcity"
                     >
                       <MagnifyingGlassIcon className="h-6 w-6 text-slate-700 dark:text-slate-200" />
                     </button>
                   </div>
                   <div className="text-slate-600 dark:text-slate-200 text-sm text-center">
-                    Remind: The city you are searching for won’t be saved when
-                    you reload.
+                    Reminder: The city that you are searching for will not be
+                    saved when you reload if it is not in the select option.
                   </div>
                 </form>
               </div>
