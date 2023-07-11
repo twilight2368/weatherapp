@@ -22,6 +22,7 @@ export default function Main(props) {
   };
 
   useEffect(() => {
+    setBaduser(false);
     setLoading(true);
     if (city) {
       fetch(url, options)

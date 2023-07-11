@@ -146,6 +146,12 @@ export default function SideBar(props) {
                   </div>
                 </form>
               </div>
+
+              <div className="w-full mt-64 flex justify-center items-center">
+                <p class="text-center text-slate-500 text-sm">
+                  &copy;2023 Mewtwo. All rights reserved.
+                </p>
+              </div>
             </div>
           </div>
           <div className="col-span-8">{props.children}</div>
