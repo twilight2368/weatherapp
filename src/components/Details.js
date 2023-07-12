@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 export default function Details(props) {
   const [timeon, setTimeon] = useState('sunrise');
-  // useEffect(() => {
-  //   console.log(props.data);
-  // }, []);
+  useEffect(() => {
+    console.log(props.data);
+  }, []);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -54,7 +54,7 @@ export default function Details(props) {
           </div>
         </div>
 
-        <div className="h-12 w-full">
+        <div className="h-10 w-full">
           <select
             id="timeon"
             className="bg-transparent  text-gray-900 text-2xl rounded-lg block w-4/5 mx-auto p-1.5 dark:bg-gray-700 dark:bg-transparent dark:text-white"
@@ -74,19 +74,21 @@ export default function Details(props) {
           </select>
         </div>
 
-        <div className="w-full pt-2 p-5 text-2xl">
-          <ul className="list-disc list-inside">
+        <div className="w-full pt-0 p-5 text-2xl flex justify-center items-center">
+          <ul className="list-none list-inside">
             <li>
-              Average temperture: {props.data.day.avgtemp_c}{" "}
+              Average temperature: {props.data.day.avgtemp_c}{" "}
               <span>&#8451;</span>
             </li>
             <li>
-              Max temperture: {props.data.day.maxtemp_c} <span>&#8451;</span>
+              Max temperature: {props.data.day.maxtemp_c} <span>&#8451;</span>
             </li>
             <li>
-              Min temperture: {props.data.day.mintemp_c} <span>&#8451;</span>
+              Min temperature: {props.data.day.mintemp_c} <span>&#8451;</span>
             </li>
             <li>Average humidity: {props.data.day.avghumidity} %</li>
+            <li>Chance of rain: {props.data.day.daily_chance_of_rain} %</li>
+            <li>Chance of snow: {props.data.day.daily_chance_of_snow} %</li>
             <li>UV warning: {props.data.day.uv}</li>
           </ul>
         </div>

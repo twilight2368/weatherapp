@@ -37,7 +37,7 @@ export default function Main(props) {
         })
         .then((data) => {
           //console.log(data);
-          setCurrentdata(data)
+          setCurrentdata(data);
           setLoading(false);
         })
         .catch((err) => {
@@ -56,13 +56,16 @@ export default function Main(props) {
           <>
             <Loading />
           </>
-        ) : (   
+        ) : (
           <>
-          { baduser ? <Notfound/>  : <>
-            <Content data = {currentdata} />
-          </>}
+            {baduser ? (
+              <Notfound />
+            ) : (
+              <>
+                <Content data={currentdata} />
+              </>
+            )}
           </>
-        
         )}
       </SideBar>
     </>

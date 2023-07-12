@@ -23,7 +23,7 @@ export default function LineChart(props) {
     labels: labels,
     datasets: [
       {
-        label: "Temperture",
+        label: "Temperature",
         backgroundColor: color,
         borderColor: color,
         data: props.data,
