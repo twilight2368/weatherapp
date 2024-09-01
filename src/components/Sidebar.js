@@ -20,19 +20,6 @@ export default function SideBar(props) {
     }
   }, []);
 
-  useEffect(() => {
-    fetch("JSON/MyCity.json")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        //console.log(data);
-        setAllcity(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
   return (
     <>
       <div className={darkmode ? "dark" : ""}>
@@ -74,52 +61,6 @@ export default function SideBar(props) {
                 </div>
               </div>
 
-              <div className="w-full">
-                <div className="relative w-4/5 mx-auto">
-                  <label
-                    htmlFor="countries"
-                    className="block mb-0 text-xl font-bold text-gray-900 dark:text-white"
-                  >
-                    Select an option
-                  </label>
-                  <select
-                    id="countries"
-                    className="bg-transparent  text-gray-900 text-2xl rounded-lg block w-full p-1.5 dark:bg-gray-700 dark:bg-transparent dark:text-white"
-                    onChange={(e) => {
-                      console.log(e.target.value);
-                      setCity(e.target.value);
-                      setSearchcity(e.target.value);
-                      localStorage.setItem("currentCity", e.target.value);
-                    }}
-                  >
-                    <option
-                      value="I dont know"
-                      className="dark:text-black text-sm hidden"
-                    >
-                      Choose your city
-                    </option>
-
-                    {allcity ? (
-                      allcity.map((e) => {
-                        return (
-                          <>
-                            <option
-                              key={e.key}
-                              value={e.key}
-                              className="text-black dark:text-black text-sm"
-                            >
-                              {e.key}
-                            </option>
-                          </>
-                        );
-                      })
-                    ) : (
-                      <></>
-                    )}
-                  </select>
-                </div>
-              </div>
-
               <div className=" w-full h-24">
                 <form
                   id="searchcity"
@@ -146,10 +87,6 @@ export default function SideBar(props) {
                     >
                       <MagnifyingGlassIcon className="h-6 w-6 text-slate-700 dark:text-slate-200" />
                     </button>
-                  </div>
-                  <div className="text-slate-600 dark:text-slate-200 text-sm text-center">
-                    Reminder: The city that you are searching for will not be
-                    saved when you reload if it is not in the select option.
                   </div>
                 </form>
               </div>

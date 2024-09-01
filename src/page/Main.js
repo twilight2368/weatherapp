@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import SideBar from "../components/Sidebar";
 import Loading from "../components/Loading";
-import { APIkey } from "../Shared";
 import { cityContext } from "../App";
 import Content from "../components/Content";
 import Notfound from "../components/Notfound";
@@ -16,7 +15,7 @@ export default function Main(props) {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": APIkey,
+      "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
       "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
     },
   };

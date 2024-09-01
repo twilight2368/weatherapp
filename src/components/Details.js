@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 export default function Details(props) {
   const [timeon, setTimeon] = useState('sunrise');
-  useEffect(() => {
-    console.log(props.data);
-  }, []);
+  // useEffect(() => {
+  //   console.log(props.data);
+  // }, []);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
