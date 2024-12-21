@@ -16,7 +16,7 @@ export default function CurrentCity(props) {
             <span className=" font-normal"> {props.data.country}</span>
           </div>
           <div className=" text-2xl font-bold">
-            <span>Last update in localtime: </span>{" "}
+            <span>Last update in localtime: </span>{" "} <br />
             <span className=" font-normal"> {props.data.localtime}</span>
           </div>
         </div>
